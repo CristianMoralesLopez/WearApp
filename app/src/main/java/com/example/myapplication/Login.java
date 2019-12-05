@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -65,23 +69,63 @@ public class Login extends WearableActivity {
         protected String doInBackground(String... strings) {
 
             String retorno = "";
+            String id = "";
 
             try {
                 OkHttpClient client = new OkHttpClient();
 
                 RequestBody postData = new FormBody.Builder()
-                        .add("correo",strings[0])
-                        .add("contraseña",strings[1]).build();
+                        .add("email",strings[1]).
+                        add("type","0")
+                        .add("password",strings[0]).build();
 
-                Request request = new Request.Builder().url("http://ec2-52-4-203-111.compute-1.amazonaws.com:8080/hello").get().build();
+              Request request = new Request.Builder().url("http://ec2-52-4-203-111.compute-1.amazonaws.com:8080/sesion").post(postData).build();
               Response  response = client.newCall(request).execute();
-               retorno = response.body().string();
-                System.out.println(retorno);
+
+              System.out.println("CODIGO BACK-END "+response.code());
+             // JSONObject object1 = new JSONObject(response.body().string());
+              //System.out.println(object1.getString("code"));
+
+
+
+              if(response.code() == 200){
+                  retorno = "ok";
+
+                  JSONObject object = new JSONObject(response.body().string());
+
+                  id = object.getString("id");
+
+
+
+
+              }else if (response.code() == 403){
+
+                    JSONObject object = new JSONObject(response.body().string());
+
+                    if (object.getString("code").equals("auth/invalid-email")){
+
+                        System.out.println("INGRESO CONTRASEÑA MAL");
+
+                        retorno = "user";
+
+                    }else if (object.getString("code").equals("auth/wrong-password")){
+
+                        System.out.println("INGRESO USUARIO MAL");
+
+                        retorno = "password";
+
+                    }
+
+
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            
-            publishProgress(retorno);
+
+            publishProgress(new String [] {retorno,id});
             return null;
         }
 
@@ -90,17 +134,27 @@ public class Login extends WearableActivity {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
 
-           login.comprobarLogin(values[0]);
+           login.comprobarLogin(values[0], values[1]);
             
             
         }
     }
 
-    private void comprobarLogin(String retorno) {
+    private void comprobarLogin(String retorno, String id) {
 
-        Intent i = new Intent(Login.this, MainActivity.class);
+        System.out.println("Si ingreso");
 
-        startActivity(i);
+        if(retorno.equals("ok")) {
+
+            Intent i = new Intent(Login.this, MainActivity.class);
+            i.putExtra("id",id);
+
+            startActivity(i);
+        }else if (retorno.equals("password")){
+            Toast.makeText(this.getApplicationContext(),"Contraseña Incorrecta",Toast.LENGTH_LONG).show();
+        }else if (retorno.equals("user")){
+            Toast.makeText(this.getApplicationContext(),"el usuario no existe",Toast.LENGTH_LONG).show();
+        }
 
     }
 

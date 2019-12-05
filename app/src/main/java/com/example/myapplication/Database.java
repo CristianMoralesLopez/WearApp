@@ -16,7 +16,7 @@ public class Database  {
     }
 
 
-    public void envioInformacion (int valorPromedio){
+    public void envioInformacion(int valorPromedio, String id){
 
 
 
@@ -63,7 +63,7 @@ public class Database  {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        databaseReference.child("pacientes").child("0EaBsE2IitYHgz52mNOXmWp4Jey2").child("monitoreo").child("pulso").child(""+intAño).child(""+intMes)
+        databaseReference.child("pacientes").child(id).child("monitoreo").child("pulso").child(""+intAño).child(""+intMes)
                 .child(""+intDia).child(tiempo).setValue(valorPromedio);
 
 

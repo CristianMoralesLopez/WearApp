@@ -22,12 +22,17 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     private Sensor mHeartrateSensor;
     private ScheduledExecutorService mScheduler;
     private Database database;
+    private String id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle =  getIntent().getExtras();
+
+        id = bundle.getString("id");
 
        mTextView = (TextView) findViewById(R.id.text);
 
@@ -89,7 +94,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
          Thread hiloDatabase = new Thread(new Runnable() {
             public void run() {
 
-                database.envioInformacion((int) event.values[0]);
+                database.envioInformacion((int) event.values[0],id);
             }
         });
 
