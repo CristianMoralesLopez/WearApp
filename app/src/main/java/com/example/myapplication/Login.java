@@ -146,7 +146,7 @@ public class Login extends WearableActivity {
 
         if(retorno.equals("ok")) {
 
-            Intent i = new Intent(Login.this, MainActivity.class);
+            Intent i = new Intent(Login.this, SetUp.class);
             i.putExtra("id",id);
 
             startActivity(i);

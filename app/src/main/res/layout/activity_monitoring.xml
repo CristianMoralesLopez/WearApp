@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_vertical_backgroud"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/inner_frame_layout_padding"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/lblPulso"
+            android:textColor="@color/black"
+            android:paddingTop="30dp"
+            android:fontFamily="@font/montserrat_medium"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="xx BPM"
+            android:textColorHint="@color/black"
+            android:layout_gravity="center"
+            android:inputType="time"
+            android:id="@+id/lblPulso"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/lblTime"
+            android:textColor="@color/black"
+            android:paddingTop="10dp"
+            android:fontFamily="@font/montserrat_medium"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="00:00"
+            android:textColorHint="@color/black"
+            android:layout_gravity="center"
+            android:inputType="time"
+            android:id="@+id/lblCronometro"/>
+
+
+        <Button
+            android:id="@+id/btnFinalizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnFin"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_circle_blue_soft"
+            android:paddingHorizontal="15dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+</androidx.wear.widget.BoxInsetLayout>
