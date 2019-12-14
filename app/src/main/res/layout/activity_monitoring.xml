@@ -16,52 +16,50 @@
         android:orientation="vertical"
         >
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/hearticon"
             android:layout_gravity="center"
-            android:text="@string/lblPulso"
-            android:textColor="@color/black"
-            android:paddingTop="30dp"
-            android:fontFamily="@font/montserrat_medium"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="xx BPM"
-            android:textColorHint="@color/black"
-            android:layout_gravity="center"
-            android:inputType="time"
-            android:id="@+id/lblPulso"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/lblTime"
-            android:textColor="@color/black"
-            android:paddingTop="10dp"
-            android:fontFamily="@font/montserrat_medium"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="00:00"
-            android:textColorHint="@color/black"
-            android:layout_gravity="center"
-            android:inputType="time"
-            android:id="@+id/lblCronometro"/>
+            ></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_86p"
+                android:layout_gravity="center"
+                android:inputType="time"
+                android:id="@+id/lblPulso" />
 
 
-        <Button
+
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/ic_timer_black_24dp"></ImageView>
+
+        <Chronometer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_medium"
+            android:id="@+id/cronometro"
+            android:layout_marginTop="5dp"
+            />
+
+
+        <ImageButton
             android:id="@+id/btnFinalizar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnFin"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_circle_blue_soft"
+            android:background="@drawable/ic_stop_black_24dp"
             android:paddingHorizontal="15dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            />
     </LinearLayout>
 </androidx.wear.widget.BoxInsetLayout>

@@ -25,15 +25,15 @@
             android:paddingTop="50dp"
             android:fontFamily="@font/montserrat_medium"
             />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="00:00"
-            android:textColorHint="@color/black"
-            android:layout_gravity="center"
-            android:inputType="time"
-            android:id="@+id/txtTime"/>
-
+       <Spinner
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/minutosSpinner"
+           android:layout_gravity="center"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="5dp"
+           />
         <Button
             android:id="@+id/btnInicio"
             android:layout_width="wrap_content"
