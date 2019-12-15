@@ -94,7 +94,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
          Thread hiloDatabase = new Thread(new Runnable() {
             public void run() {
 
-                database.envioInformacion((int) event.values[0],id);
+
             }
         });
 
