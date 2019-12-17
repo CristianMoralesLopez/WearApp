@@ -11,4 +11,5 @@
     <string name="lblPulso">Pulso</string>
     <string name="lblTime">Tiempo</string>
     <string name="btnFin">Finalizar</string>
+    <string name="title_activity_resumen_actividades">ResumenActividades</string>
 </resources>

@@ -205,10 +205,15 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
                         Database database = new Database();
                         database.envioInformacion(rutina);
 
-                        Intent i = new Intent(Monitoring.this, SetUp.class);
+                        Intent i = new Intent(Monitoring.this, ResumenActividades.class);
+                        i.putExtra("valorPulso", ""+valoresPulso.get(0));
+                        i.putExtra("duracion",duracion);
+                        i.putExtra("horaInicio",horaInicio);
+                        i.putExtra("horaFin",horaFin);
                         mScheduler.shutdown();
                         unregisterListener();
                         startActivity(i);
+                        finish();
 
 
 

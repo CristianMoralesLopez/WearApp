@@ -55,6 +55,7 @@ public class TimeSetUp extends WearableActivity {
                 i.putExtra("minutos",valorSeleccionado);
                 Toast.makeText(getApplicationContext(), ""+ valorSeleccionado, Toast.LENGTH_LONG).show();
                 startActivity(i);
+                finish();
             }
         });
 

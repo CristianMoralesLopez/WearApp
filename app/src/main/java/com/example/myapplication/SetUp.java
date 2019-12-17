@@ -24,6 +24,7 @@ public class SetUp extends WearableActivity {
 
                 Intent i = new Intent(SetUp.this,TimeSetUp.class);
                 startActivity(i);
+                finish();
 
             }
         });
