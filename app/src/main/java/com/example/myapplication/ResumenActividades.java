@@ -25,6 +25,7 @@ public class ResumenActividades extends WearableActivity {
     private TextView lblDuracion;
     private TextView lblHoraFin;
     private ImageButton btnSend;
+    private Rutina rutina;
 
 
     @Override
@@ -38,7 +39,11 @@ public class ResumenActividades extends WearableActivity {
 
         btnSend = findViewById(R.id.btnSend);
 
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle = getIntent().getExtras();
+
+        rutina = (Rutina) bundle.getSerializable("rutina");
+
+
 
         lblPulsoPromedio.setText(bundle.getString("valorPulso"));
         lblDuracion.setText(bundle.getString("duracion"));
@@ -49,7 +54,10 @@ public class ResumenActividades extends WearableActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ResumenActividades.this, SetUp.class);
+                Intent i = new Intent(ResumenActividades.this, PostMonitoreo.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putSerializable("rutina",rutina);
+                i.putExtras(bundle1);
                 startActivity(i);
                 finish();
             }

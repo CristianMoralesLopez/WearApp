@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Monitoring extends WearableActivity implements SensorEventListener {
+public class PostMonitoreo extends WearableActivity implements SensorEventListener {
 
     private final static int SENS_HEARTRATE = Sensor.TYPE_HEART_RATE;
 
@@ -35,6 +35,7 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
     private ArrayList<Integer> valoresPulso;
     private String horaInicio;
     private String horaFin;
+    private Rutina rutina;
 
 
     private Chronometer chronometer;
@@ -49,13 +50,13 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monitoring);
+        setContentView(R.layout.activity_post_monitoreo);
         Bundle bundle = this.getIntent().getExtras();
-        duracion = (String) bundle.get("minutos");
+        duracion = (String) "1";
         valoresPulso = new ArrayList<>();
-        chronometer = findViewById(R.id.cronometro);
-        btnStop = findViewById(R.id.btnFinalizar);
-        lblPulso = findViewById(R.id.lblPulso);
+        chronometer = findViewById(R.id.Pcronometro);
+        btnStop = findViewById(R.id.PbtnFinalizar);
+        lblPulso = findViewById(R.id.PlblPulso);
         sensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
         mHeartrateSensor = sensorManager.getDefaultSensor(SENS_HEARTRATE);
         handler = new Handler();
@@ -67,7 +68,7 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Monitoring.this, chronometer.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostMonitoreo.this, chronometer.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,7 +123,7 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
                     public void run() {
 
 
-                        sensorManager.registerListener(Monitoring.this, mHeartrateSensor, SensorManager.SENSOR_DELAY_FASTEST);
+                        sensorManager.registerListener(PostMonitoreo.this, mHeartrateSensor, SensorManager.SENSOR_DELAY_FASTEST);
 
                         try {
                             Thread.sleep(measurementDuration * 1000);
@@ -131,7 +132,7 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
 
                         }
 
-                        sensorManager.unregisterListener(Monitoring.this, mHeartrateSensor);
+                        sensorManager.unregisterListener(PostMonitoreo.this, mHeartrateSensor);
                     }
                 }, 3, measurementDuration + measurementBreak, TimeUnit.SECONDS);
     }
@@ -193,28 +194,16 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
                     int paradaCronometro = Integer.parseInt(duracion);
 
                     if (paradaCronometro == comparacion){
-                        horaFin = hora();
+                       rutina.setHoraFin1(hora());
+                       rutina.setValoresPulso2(valoresPulso);
 
-                        Rutina rutina = new Rutina();
-                        rutina.setValoresPulso(valoresPulso);
-                        rutina.setDuracion(duracion);
-                        rutina.setHoraInicio(horaInicio);
-                        rutina.setHoraFin(horaFin);
-                        rutina.setValoresPulso2(null);
+
                         parada = false;
 
+                        Database database = new Database();
+                        database.envioInformacion(rutina);
 
-                        Intent i = new Intent(Monitoring.this, ResumenActividades.class);
-
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("rutina",rutina);
-                        bundle.putString("valorPulso", ""+valoresPulso.get(0));
-                        bundle.putString("duracion",duracion);
-                        bundle.putString("horaInicio",horaInicio);
-                        bundle.putString("horaFin",horaFin);
-
-                        i.putExtras(bundle);
-
+                        Intent i = new Intent(PostMonitoreo.this, SetUp.class);
                         mScheduler.shutdown();
                         unregisterListener();
                         startActivity(i);
@@ -254,6 +243,10 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
     @Override
     protected void onStart() {
         super.onStart();
-        horaInicio = hora();
+        final Bundle bundle = getIntent().getExtras();
+
+        rutina = (Rutina) bundle.getSerializable("rutina");
+
+        rutina.setHoraInicio1(hora());
     }
 }
