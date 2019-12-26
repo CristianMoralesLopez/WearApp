@@ -24,6 +24,8 @@ public class ResumenActividades extends WearableActivity {
     private TextView lblHoraIncio;
     private TextView lblDuracion;
     private TextView lblHoraFin;
+    private TextView lblPasos;
+    private TextView lblCalorias;
     private ImageButton btnSend;
     private Rutina rutina;
 
@@ -36,6 +38,8 @@ public class ResumenActividades extends WearableActivity {
         lblDuracion = findViewById(R.id.lblduracion);
         lblHoraIncio = findViewById(R.id.lblHoraInicio);
         lblHoraFin = findViewById(R.id.lblHoraFin);
+        lblCalorias = findViewById(R.id.lblCalorias);
+        lblPasos = findViewById(R.id.lblPasos);
 
         btnSend = findViewById(R.id.btnSend);
 
@@ -49,6 +53,8 @@ public class ResumenActividades extends WearableActivity {
         lblDuracion.setText(bundle.getString("duracion"));
         lblHoraIncio.setText(bundle.getString("horaInicio"));
         lblHoraFin.setText(bundle.getString("horaFin"));
+        lblPasos.setText(bundle.getString("pasos"));
+        lblCalorias.setText(bundle.getString("calorias"));
 
 
         btnSend.setOnClickListener(new View.OnClickListener() {

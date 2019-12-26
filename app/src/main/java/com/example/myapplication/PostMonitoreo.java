@@ -112,7 +112,7 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        final int measurementDuration   = 15;   // Seconds
+        final int measurementDuration   = Integer.parseInt(duracion)*60;   // Seconds
         final int measurementBreak      = 10;    // Seconds
 
         mScheduler = Executors.newScheduledThreadPool(1);

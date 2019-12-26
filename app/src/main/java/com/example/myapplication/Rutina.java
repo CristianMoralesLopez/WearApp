@@ -14,6 +14,14 @@ public class Rutina implements Serializable {
     private String duracion;
     private String horaInicio1;
     private String horaFin1;
+    private String pasos;
+    private String calorias;
+    private String promedioPulso;
+    private String menorPulso;
+    private String mayorPulso;
+    private String modaPulso;
+
+
 
 
     public Rutina(ArrayList<Integer> valoresPulso, ArrayList<Integer> valoresPulso2, String horaInicio, String horaFin, String duracion) {
@@ -82,5 +90,54 @@ public class Rutina implements Serializable {
 
     public void setHoraFin1(String horaFin1) {
         this.horaFin1 = horaFin1;
+    }
+
+
+    public String getPasos() {
+        return pasos;
+    }
+
+    public void setPasos(String pasos) {
+        this.pasos = pasos;
+    }
+
+    public String getCalorias() {
+        return calorias;
+    }
+
+    public void setCalorias(String calorias) {
+        this.calorias = calorias;
+    }
+
+    public String getPromedioPulso() {
+        return promedioPulso;
+    }
+
+    public void setPromedioPulso(String promedioPulso) {
+        this.promedioPulso = promedioPulso;
+    }
+
+    public String getMenorPulso() {
+        return menorPulso;
+    }
+
+    public void setMenorPulso(String menorPulso) {
+        this.menorPulso = menorPulso;
+    }
+
+    public String getMayorPulso() {
+        return mayorPulso;
+    }
+
+    public void setMayorPulso(String mayorPulso) {
+        this.mayorPulso = mayorPulso;
+    }
+
+    public String getModaPulso() {
+        return modaPulso;
+    }
+
+    public void setModaPulso(String modaPulso) {
+        this.modaPulso = modaPulso;
     }
 }
