@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Rutina implements Serializable {
 
-    private ArrayList <Integer> valoresPulso;
-    private ArrayList <Integer> valoresPulso2;
+    private ArrayList<Integer> valoresPulso;
+    private ArrayList<Integer> valoresPulso2;
 
 
     private String horaInicio;
@@ -19,9 +19,9 @@ public class Rutina implements Serializable {
     private String promedioPulso;
     private String menorPulso;
     private String mayorPulso;
-    private String modaPulso;
-
-
+    private String promedioPulso1;
+    private String menorPulso1;
+    private String mayorPulso1;
 
 
     public Rutina(ArrayList<Integer> valoresPulso, ArrayList<Integer> valoresPulso2, String horaInicio, String horaFin, String duracion) {
@@ -32,7 +32,7 @@ public class Rutina implements Serializable {
         this.duracion = duracion;
     }
 
-    public Rutina (){
+    public Rutina() {
 
     }
 
@@ -133,11 +133,28 @@ public class Rutina implements Serializable {
         this.mayorPulso = mayorPulso;
     }
 
-    public String getModaPulso() {
-        return modaPulso;
+    public String getPromedioPulso1() {
+        return promedioPulso1;
     }
 
-    public void setModaPulso(String modaPulso) {
-        this.modaPulso = modaPulso;
+    public void setPromedioPulso1(String promedioPulso1) {
+        this.promedioPulso1 = promedioPulso1;
+    }
+
+    public String getMenorPulso1() {
+        return menorPulso1;
+    }
+
+    public void setMenorPulso1(String menorPulso1) {
+        this.menorPulso1 = menorPulso1;
+    }
+
+    public String getMayorPulso1() {
+        return mayorPulso1;
+    }
+
+    public void setMayorPulso1(String mayorPulso1) {
+        this.mayorPulso1 = mayorPulso1;
     }
 }
+

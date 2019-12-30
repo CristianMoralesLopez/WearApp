@@ -324,4 +324,11 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
         super.onStart();
         horaInicio = hora();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mScheduler.shutdown();
+        unregisterListener();
+    }
 }

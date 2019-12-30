@@ -9,11 +9,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Database  {
 
 
     private FirebaseDatabase firebaseDatabase;
+
 
     public Database(){
 
@@ -69,14 +77,16 @@ public class Database  {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-        databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getId()).child("monitoreo").child("pulso").child(""+intAño).child(""+intMes)
+        databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getUID()).child("monitoreo").child("pulso").child(""+intAño).child(""+intMes)
                 .child(""+intDia).child(tiempo).setValue(rutina);
 
-       final DatabaseReference referencia =  databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getId()).child("monitoreo").child("pulso").child("tomas");
+       final DatabaseReference referencia =  databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getUID()).child("monitoreo").child("pulso").child("tomas");
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        referencia.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                 referencia.child(""+dataSnapshot.getChildrenCount()).child("fecha").setValue(intAño+"/"+intMes+"/"+intDia+"/"+tiempo);
             }
 
@@ -85,6 +95,35 @@ public class Database  {
 
             }
         });
+
+        try {
+
+            OkHttpClient okhttp = new OkHttpClient.Builder()
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .readTimeout(15, TimeUnit.SECONDS)
+                    .build();
+
+
+            RequestBody body = new FormBody.Builder()
+                    .add("id", LocalDataBase.getInstance(null).getUser().getUID())
+                    .add("data", "dkflañs")
+
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url(NetworkConstants.URL + NetworkConstants.PATH_FINIS_SESION)
+                    .post(body)
+                    .build();
+
+            Response response = okhttp.newCall(request).execute();
+
+        }catch (Exception e){
+
+
+        }
+
+
+
 
 
 

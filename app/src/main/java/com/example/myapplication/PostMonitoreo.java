@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -197,6 +198,14 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
                        rutina.setHoraFin1(hora());
                        rutina.setValoresPulso2(valoresPulso);
 
+                        Collections.sort(valoresPulso);
+
+                        rutina.setMenorPulso1(""+valoresPulso.get(0));
+                        rutina.setMayorPulso1(""+valoresPulso.get(valoresPulso.size()-1));
+                        rutina.setPromedioPulso1(promedioPulso(valoresPulso));
+
+
+
 
                         parada = false;
 
@@ -235,6 +244,28 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
 
         return retorno;
     }
+    public String promedioPulso (ArrayList<Integer> valores){
+
+        int acumulado = 0;
+
+
+
+        for (int i = 0; i < valores.size();i++ ){
+
+            acumulado += valores.get(i);
+        }
+
+
+        return ""+ (acumulado/valores.size());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mScheduler.shutdown();
+        unregisterListener();
+    }
+
 
     private void unregisterListener(){
         sensorManager.unregisterListener(this);

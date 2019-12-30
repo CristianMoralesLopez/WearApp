@@ -53,17 +53,37 @@ public class AgentLogin {
 
                         JSONObject object = new JSONObject(response.body().string());
 
-                        User user = new User();
-                        user.setId(object.getString("id"));
-                        user.setEmail(object.getString("email"));
-                        user.setName(object.getString("nombre"));
-                        user.setPhone((object.getString("telefono")));
-                        user.setDepartment((object.getString("departamento")));
-                        user.setAdress((object.getString("direccion")));
-                        user.setMunicipality((object.getString("municipio")));
-                        user.setBirth((object.getString("nacimiento")));
+                        User patient = new User();
+                        patient.setUID(object.getString("id"));
+                        patient.setName(object.getString("nombre"));
+                        patient.setId(object.getString("cedula"));
+                        patient.setBirth(object.getString("fecha_nacimiento"));
+                        patient.setAge(object.getString("edad"));
+                        patient.setRisk(object.getString("riesgo"));
+                        patient.setDiagnostic(object.getString("diagnostico"));
+                        patient.setEmail(object.getString("email"));
+                        patient.setMobile_number(object.getString("celular"));
+                        patient.setWeight(object.getString("altura"));
+                        patient.setHeight(object.getString("peso"));
 
-                        LocalDataBase.getInstance(null).saveUser(user);
+                        try {
+                            patient.setTelephone(object.getString("telefono"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        patient.setState(object.getString("departamento"));
+                        patient.setCity(object.getString("ciudad"));
+                        patient.setAddress(object.getString("direccion"));
+                        patient.setRef(object.getString("ref"));
+
+                        JSONObject inf_contact = object.getJSONObject("contacto");
+                        patient.setName_contact(inf_contact.getString("nombre"));
+                        patient.setTelephone_contact(inf_contact.getString("telefono"));
+                        patient.setRelation(inf_contact.getString("parentesco"));
+
+
+                        LocalDataBase.getInstance(null).saveUser(patient);
                         callback.onFinishProcess(true, null);
                     } else
                         callback.onFinishProcess(false, null);

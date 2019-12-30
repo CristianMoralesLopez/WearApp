@@ -13,4 +13,5 @@
     <string name="btnFin">Finalizar</string>
     <string name="title_activity_resumen_actividades">ResumenActividades</string>
     <string name="title_activity_post_monitoreo">PostMonitoreo</string>
+    <string name="title_activity_ensayo">Ensayo</string>
 </resources>
