@@ -53,6 +53,53 @@ public class Ensayo extends WearableActivity {
         });
 
 
+        final DatabaseReference referenciaPasosLogrados =  databaseReference.child("pacientes").child("b4Suc3zhlPbR3LJyy7QY7vGtHUQ2").child("metas").child("PasosLogrados");
+
+        referenciaPasosLogrados.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String valorActual = (String)  dataSnapshot.getValue().toString();
+
+                int valorSumar = 50;
+
+                int valoActualint = Integer.parseInt(valorActual);
+
+                int valorAñadir = valorSumar + valoActualint;
+
+                referenciaPasosLogrados.setValue(""+ valorAñadir);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final DatabaseReference referenciaKgLogrados =  databaseReference.child("pacientes").child("b4Suc3zhlPbR3LJyy7QY7vGtHUQ2").child("metas").child("kgCaloriasLogradas");
+
+        referenciaKgLogrados.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String valorActual = (String)  dataSnapshot.getValue().toString();
+
+                int valorSumar = 10;
+
+                int valoActualint = Integer.parseInt(valorActual);
+
+                int valorAñadir = valorSumar + valoActualint;
+
+                referenciaKgLogrados.setValue(""+ valorAñadir);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         // Enables Always-on
         setAmbientEnabled();
     }

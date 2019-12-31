@@ -30,7 +30,7 @@ public class Database  {
     }
 
 
-    public void envioInformacion(Rutina rutina){
+    public void envioInformacion(final Rutina rutina){
 
 
 
@@ -86,6 +86,9 @@ public class Database  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                System.out.println("valores de las tomas" +
+                        ""+dataSnapshot.getChildrenCount());
+
 
                 referencia.child(""+dataSnapshot.getChildrenCount()).child("fecha").setValue(intAño+"/"+intMes+"/"+intDia+"/"+tiempo);
             }
@@ -95,6 +98,58 @@ public class Database  {
 
             }
         });
+
+        final DatabaseReference referenciaPasosLogrados =  databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getUID()).child("metas").child("PasosLogrados");
+
+        referenciaPasosLogrados.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+              String valorActual = (String)  dataSnapshot.getValue().toString();
+
+              int valorSumar = Integer.parseInt(rutina.getPasos());
+
+              System.out.println("cantidad de calorias" + rutina.getCalorias());
+
+              int valoActualint = Integer.parseInt(valorActual);
+
+              int valorAñadir = valorSumar + valoActualint;
+
+              referenciaPasosLogrados.setValue(""+ valorAñadir);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final DatabaseReference referenciaKgLogrados =  databaseReference.child("pacientes").child(LocalDataBase.getInstance(null).getUser().getUID()).child("metas").child("kgCaloriasLogradas");
+
+        referenciaKgLogrados.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String valorActual = (String)  dataSnapshot.getValue().toString();
+
+
+                double valorSumar = Double.parseDouble(rutina.getCalorias());
+
+                System.out.println("cantidad de calorias" + rutina.getCalorias());
+
+                int valoActualint = Integer.parseInt(valorActual);
+
+                double valorAñadir = valorSumar + valoActualint;
+
+                referenciaKgLogrados.setValue(""+ valorAñadir);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         try {
 
