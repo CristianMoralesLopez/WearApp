@@ -9,10 +9,12 @@
     tools:context=".MainActivity"
     tools:deviceIds="wear">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/inner_frame_layout_padding"
+        android:orientation="vertical"
+        android:gravity="center"
         >
 
         <Button
@@ -26,6 +28,18 @@
             android:padding="10dp"
             android:fontFamily="@font/montserrat_medium" />
 
+        <Button
+            android:id="@+id/btnSignout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_circle_white_soft"
+            android:fontFamily="@font/montserrat_medium"
+            android:padding="10dp"
+            android:text="Cerrar Sesión"
+            android:textColor="@color/blue_strong"
+            android:layout_marginTop="15dp"/>
 
-    </FrameLayout>
+
+    </LinearLayout>
 </androidx.wear.widget.BoxInsetLayout>
