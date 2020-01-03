@@ -51,8 +51,8 @@
             android:text="Ingresar"
             android:id="@+id/btnIngresar"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:background="@color/blue_a400"
+            android:textColor="@color/blue_strong"
+            android:background="@drawable/rounded_circle_blue_soft"
             android:fontFamily="@font/montserrat_medium"></Button>
 
 

@@ -57,6 +57,9 @@ public class ResumenActividades extends WearableActivity {
         lblCalorias.setText(bundle.getString("calorias"));
 
 
+
+
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +71,8 @@ public class ResumenActividades extends WearableActivity {
                 finish();
             }
         });
+
+        setAmbientEnabled();
 
     }
 

@@ -53,7 +53,7 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_monitoreo);
         Bundle bundle = this.getIntent().getExtras();
-        duracion = (String) "1";
+        duracion = (String) "3";
         valoresPulso = new ArrayList<>();
         chronometer = findViewById(R.id.Pcronometro);
         btnStop = findViewById(R.id.PbtnFinalizar);
@@ -113,7 +113,7 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        final int measurementDuration   = Integer.parseInt(duracion)*60;   // Seconds
+        final int measurementDuration   = 4*60;   // Seconds
         final int measurementBreak      = 10;    // Seconds
 
         mScheduler = Executors.newScheduledThreadPool(1);
@@ -151,7 +151,7 @@ public class PostMonitoreo extends WearableActivity implements SensorEventListen
         valoresPulso.add((int   ) event.values[0]);
         lblPulso.setText(msg);
 
-        if((int)event.values[0]>=100) {
+        if((int)event.values[0]>=120) {
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             long[] vibrationPattern = {0, 500, 50, 300};
             final int indexInPatternToRepeat = -1;

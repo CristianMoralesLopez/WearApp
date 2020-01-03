@@ -165,7 +165,7 @@ public class Monitoring extends WearableActivity implements SensorEventListener 
             valoresPulso.add((int) event.values[0]);
             lblPulso.setText(msg);
 
-            if ((int) event.values[0] >= 100) {
+            if ((int) event.values[0] >= 150) {
                 Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                 long[] vibrationPattern = {0, 500, 50, 300};
                 final int indexInPatternToRepeat = -1;

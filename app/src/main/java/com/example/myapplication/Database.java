@@ -137,7 +137,7 @@ public class Database  {
 
                 System.out.println("cantidad de calorias" + rutina.getCalorias());
 
-                int valoActualint = Integer.parseInt(valorActual);
+                Double valoActualint = Double.parseDouble(valorActual);
 
                 double valorAñadir = valorSumar + valoActualint;
 
